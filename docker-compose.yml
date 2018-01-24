@@ -1,0 +1,19 @@
+eureka-server:
+  image: itmuch/spring-cloud-eureka:0.0.1-SNAPSHOT
+  hostname: eureka
+  ports:
+    - "8000:8000"
+
+producer:
+  image:  itmuch/spring-cloud-producer:0.0.1-SNAPSHOT
+#  ports:
+#    - "9000:9000"
+  links:
+    - "eureka-server"
+
+consumer:
+  image:  itmuch/spring-cloud-consumer:0.0.1-SNAPSHOT
+  ports:
+    - "9001:9001"
+  links:
+    - "eureka-server"
